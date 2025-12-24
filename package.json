@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@shoelace-style/shoelace": "^2.20.1",
-    "lit": "^3.3.1"
+    "@tailwindcss/vite": "^4.1.18",
+    "lit": "^3.3.1",
+    "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
     "vite": "^7.2.4"

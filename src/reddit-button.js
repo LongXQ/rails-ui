@@ -44,7 +44,7 @@ export class RedditButton extends LitElement {
 
   render() {
     return html`
-      <sl-button>Button</sl-button>
+      <sl-icon name="alipay"></sl-icon>
     `
   }
 
