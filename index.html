@@ -42,8 +42,8 @@
                                                 arialabel="来自 mrmegatelo24 8个月前 的评论" class="relative" mod-tools-host record-ttci award-count="0" reply-permalink aria-hidden="false">
 
                                   <div slot="commentAvatar">
-                                      <rpl-hovercard trigger="click" placement="bottom-start" appearance="neutral">
-                                          <div class="flex flex-row items-center">
+                                      <rpl-hovercard trigger="click" placement="bottom-start" appearance="neutral" active>
+                                          <div slot="anchor" class="flex flex-row items-center">
                                               <faceplate-tracker source="post_detail" action="click"
                                                                  noun="comment_author_avatar" class="flex items-center">
                                                   <a href="/user/mrmegatelo24/"
@@ -110,9 +110,87 @@
   </span></span></a>
                                               </faceplate-tracker>
                                           </div>
-                                          <div slot="content"></div>
+                                          <div slot="content">
+                                              <div class="user-hover-card max-w-[352px] min-w-[272px] " data-testid="user-hover-card" data-moderated="false">
+        <div class="p-md flex flex-col">
+      <div class="flex flex-row justify-items-start items-center">
+        <div class="me-sm">
+          <faceplate-tracker source="user_hovercard" action="click" noun="user_avatar">
+            <a rpl="" class=" a cursor-pointer
+
+
+
+  no-visited
+  hover:underline
+  " href="/user/mrmegatelo24/" target="_blank"><div rpl="" class="full-snoo-sm inline-flex justify-center items-center relative box-border no-safe-area">
+      <img src="https://i.redd.it/snoovatar/avatars/nftv2_bmZ0X2VpcDE1NToxMzdfNjIyZDhmZWE0NjAzYmE5ZWRhZjEwODRiNDA3MDUyZDhiMGE5YmVkN18yOTY0ODk1_rare_ad23de78-0e8a-4b00-8744-fb9e9f72c79c.png" alt="u/mrmegatelo24 头像" class=" m-0">
+    </div></a>
+          <!----></faceplate-tracker>
+        </div>
+        <!-- Width +4px/mr -4px to prevent a overflow issue on firefox. See GESHRED-117 -->
+        <div class="flex flex-col max-w-[calc(100%-60px)] me-[-4px]">
+          <div class="flex overflow-hidden text-ellipsis w-[calc(100%+4px)]">
+            <div class="flex items-center">
+              <faceplate-tracker source="user_hovercard" action="click" noun="user_profile">
+                <a rpl="" class="font-bold text-18 text-neutral-content-strong a cursor-pointer
+
+
+
+  no-visited
+  hover:underline
+  " href="/user/mrmegatelo24/" target="_blank">mrmegatelo24</a>
+              <!----></faceplate-tracker>
+            </div>
+
+          </div>
+          <div class="flex items-start justify-start text-neutral-content-weak">
+            <span class="truncate">u/mrmegatelo24</span>
+
+          </div>
+          <div class="flex items-center text-neutral-content-weak">
+            <svg rpl="" class="me-2xs" fill="currentColor" height="16" icon-name="cake" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16.771 6.795l-5.776-4.072c-1.099-.774-2.521-.939-3.716-.429-.945.405-1.875.998-2.688 1.714-1.646 1.45-2.59 3.584-2.59 5.855v5.834c0 1.82 1.48 3.301 3.3 3.301h9.4c1.819 0 3.3-1.48 3.3-3.3V9.165c0-.94-.46-1.828-1.229-2.372l-.001.001zM5.779 5.36a8.38 8.38 0 012.208-1.41c.234-.1.487-.15.743-.15.425 0 .857.135 1.227.396l5.844 4.12a.464.464 0 01.183.542.465.465 0 01-.463.34h-9.52c-.822 0-1.578.267-2.2.712v-.045c0-1.754.721-3.396 1.979-4.504h-.001zM14.7 17.2H5.3a1.501 1.501 0 01-1.499-1.5v-2.704c0-1.213.987-2.2 2.2-2.2h9.52c.239 0 .466-.04.679-.11v1.876a.638.638 0 01-.638.638H7v1.6h8.562c.223 0 .434-.043.638-.104v1.003c0 .828-.672 1.501-1.499 1.501H14.7z"></path>
+    </svg>
+            <time datetime="2018-06-03T00:00:00.000Z" data-testid="cake-day" title="2018年6月3日星期日 UTC 00:00:00">
+    2018年6月3日
+  </time>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="flex flex-row mt-md text-neutral-content">
+        <div class="flex flex-col">
+          <span data-testid="karma-number" class="font-semibold text-14">
+    11
+  </span>
+          <div class="text-neutral-content-weak text-12">
+            帖子 karma
+          </div>
+        </div>
+        <div class="flex flex-col ms-md">
+          <span data-testid="karma-number" class="font-semibold text-14">
+    12
+  </span>
+          <div class="text-neutral-content-weak text-12">
+            评论 karma
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+      </div>
+        </div>
+                                          </div>
                                       </rpl-hovercard>
                                   </div>
+
+
 
                                   <div slot="commentMeta" class="ms-xs py-[2px] min-w-0">
 
@@ -122,7 +200,7 @@
 
 
       <rpl-hovercard trigger="click" placement="bottom-start" appearance="neutral">
-        <div class="flex flex-row items-center overflow-hidden author-name-meta">
+        <div slot="anchor" class="flex flex-row items-center overflow-hidden author-name-meta">
 
     <faceplate-tracker source="post_detail" action="click" noun="comment_author" class="contents">
        <a class="truncate font-bold text-neutral-content-strong text-12 focus-visible:-outline-offset-1 hover:underline" href="/user/mrmegatelo24/" aria-label="mrmegatelo24 的个人资料" aria-haspopup="dialog" aria-expanded="false">
@@ -175,6 +253,55 @@
 
     </button>
     <!----></faceplate-tracker>
+                                          <shreddit-composer slot="comment-composer" class="w-full block" name="content" mode="richText" required="" placeholder="回复 u/mrmegatelo24"
+                   aria-describedby="comment-composer-message-t1_mqhv0fs" aria-required="true" aria-disabled="false">
+
+    <div slot="rte"
+         class="cursor-text px-md py-sm outline-none relative resize-y overflow-y-auto min-h-[44px] leading-5 box-border [&amp;_*:first-child:not(li)]:mt-0 [&amp;_*:last-child]:mb-0"
+         name="body" contenteditable="true" role="textbox" tabindex="1" aria-placeholder="回复 u/mrmegatelo24"
+         data-lexical-editor="true" style="user-select: text; white-space: pre-wrap; word-break: break-word;"><p
+            class="first:mt-0 last:mb-0" dir="auto"><br></p></div>
+
+    <button rpl="" class="
+button-small px-[var(--rem10)]
+button-secondary
+
+
+
+items-center justify-center
+button inline-flex " slot="cancel-button" type="reset">
+      <span class="flex items-center justify-center">
+
+      <span class="flex items-center gap-xs">取消</span>
+    </span>
+
+    </button>
+    <button rpl=""
+            class="relative button-small px-[var(--rem10)] button-primary items-center justify-center button inline-flex cursor-pointer"
+            slot="submit-button" type="submit">
+      <span class="flex items-center justify-center">
+
+      <span class="flex items-center gap-xs">
+            <span class="block relative">
+              <span slot="content" style="opacity: 1;">
+                评论
+              </span>
+              <span slot="spinner" class="absolute inset-0 flex justify-center items-center hidden" aria-hidden="true">
+                <svg rpl="" class="animate-spin leading-[0] absolute" fill="currentColor" height="20" icon-name="load"
+                     viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18.1 10.9h-3a.9.9 0 010-1.8h3a.9.9 0 010 1.8zM5.8 10a.9.9 0 00-.9-.9h-3a.9.9 0 000 1.8h3a.9.9 0 00.9-.9zm5.1 8.1v-3a.9.9 0 00-1.8 0v3a.9.9 0 001.8 0zm0-13.2v-3a.9.9 0 00-1.8 0v3a.9.9 0 001.8 0zm5.464-1.264a.9.9 0 00-1.273 0L12.97 5.757a.901.901 0 001.273 1.273l2.121-2.121a.901.901 0 000-1.273zM7.03 12.97a.9.9 0 00-1.273 0l-2.121 2.121a.901.901 0 001.273 1.273l2.121-2.121a.901.901 0 000-1.273zm9.334 2.121l-2.121-2.121a.9.9 0 00-1.273 1.273l2.121 2.121a.9.9 0 001.273-1.273zM7.03 5.758L4.909 3.637A.9.9 0 003.636 4.91l2.121 2.121A.9.9 0 007.03 5.758z"></path>
+    </svg>
+              </span>
+            </span>
+          </span>
+    </span>
+
+    </button>
+</shreddit-composer>
+
+  <shreddit-overflow-menu slot="overflow" source="comment" action="click" noun="overflow_menu" class="nd:hidden" post-id="t3_1kdjcz1" comment-id="t1_mqhv0fs" permalink="/r/javascript/comments/1kdjcz1/comment/mqhv0fs/" author-name="mrmegatelo24" author-id="t2_1i2g4pwe" telemetry-source="post_detail" class-override="comment-overflow-menu" subreddit-id="t5_2qh30" editable-comment="" is-awardable="" is-user-logged-in="" should-render-follow-menu-item="" can-render-share-button="" can-render-award-button="" can-open-composer="" comment-created-timestamp="2025-05-04T06:16:40.316000+0000" comment-stats-kill-switch="">
+
+    </shreddit-overflow-menu>
                                       </shreddit-comment-action-row>
                                   </div>
 

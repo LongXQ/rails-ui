@@ -1,4 +1,6 @@
-import {LitElement, css, html} from 'lit'
+import {LitElement, css, html, nothing} from 'lit'
+
+import '@shoelace-style/shoelace/dist/components/popup/popup.js';
 
 /**
  * An example element.
@@ -8,21 +10,67 @@ import {LitElement, css, html} from 'lit'
  */
 export class RplHovercard extends LitElement {
     static get properties() {
-        return {}
+        return {
+            isActive: { attribute: 'active', reflect: true, type: Boolean },
+            shift: { type: Boolean },
+            flip: { type: Boolean },
+            shiftPadding: { attribute: 'shift-padding', type: Number },
+            hoverBridge: { attribute: 'hover-bridge', type: Boolean },
+            placement: { type: String },
+            distance: { type: Number },
+            sync: { type: String },
+            autoSize: { attribute: 'auto-size', type: String },
+            strategy: { type: String },
+
+        }
     }
 
     constructor() {
-        super()
+        super();
+        this.isActive = false;
+        this.shift = false;
+        this.flip = false;
+        this.hoverBridge = false;
+        this.placement = 'bottom-end';
+        this.distance = 0;
+        this.sync = '';
+        this.autoSize = '';
+        this.strategy = 'absolute';
+    }
+
+        _click(e) {
+        e.preventDefault();
     }
 
     render() {
+        console.log(this.isActive);
         return html`
-            <slot name="anchor"></slot>
-            <span part="safe-area" class=" popup-safe-area "></span>
-            <div part="popup" class=" popup ">
-                <slot></slot> 
-            </div>
+            <sl-popup
+                    active="${this.isActive || nothing}"
+                    shift="${this.shift || nothing}"
+                    shift-padding="${this.shiftPadding || nothing}"
+                    hover-bridge="${this.hoverBridge || nothing}"
+                    flip="${this.flip || nothing}"
+                    placement="${this.placement}"
+                    distance="${this.distance}"
+                    sync="${this.sync}"
+                    auto-size="${this.autoSize}"
+                    strategy="${this.strategy}"
+            >
+                <slot name="anchor" slot="anchor" @click="${this._click}"></slot>
+                
+                <div part="popup" class=" popup ">
+                    <slot></slot>
+                </div>
+            </sl-popup>
         `
+        // return html`
+        //     <slot name="anchor"></slot>
+        //     <span part="safe-area" class=" popup-safe-area "></span>
+        //     <div part="popup" class=" popup ">
+        //         <slot></slot>
+        //     </div>
+        // `
     }
 
     static get styles() {
@@ -41,6 +89,7 @@ export class RplHovercard extends LitElement {
             :host *, :host ::after, :host ::before {
     box-sizing: inherit;
 }
+
             .popup-safe-area {
     position: fixed;
     z-index: calc(var(--faceplate-tooltip-z-index, 1) - 1);

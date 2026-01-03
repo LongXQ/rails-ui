@@ -1,5 +1,5 @@
 import {LitElement, css, html} from 'lit'
-import {shredditCommentStyles} from "../shreddit-comment/shreddit-comment-styles.js";
+import {shredditStyles} from "../shreddit-styles.js";
 
 /**
  * An example element.
@@ -57,12 +57,184 @@ export class ShredditCommentActionRow extends LitElement {
                         <slot name="overflow"></slot>
                     </div>
                     <slot name="mod-content-actions"></slot>
-                </div>  </div>
+                </div></div>
+                <div class="py-md "> <slot name="comment-composer"></slot></div>
         `
     }
 
     static get styles() {
-        return [shredditCommentStyles, css``]
+
+        return [
+            shredditStyles,
+            css`
+                .rpl-vote-button-group { /* APPEARANCE AGNOSTIC STYLES */ /* PLAIN APPEARANCE */ /* SECONDARY APPEARANCE */ /* BORDERED APPEARANCE */
+                    --vote-button-divider-color: var(--color-neutral-border-weak); /* MEDIA APPEARANCE */
+                }
+
+                .rpl-vote-button-group:not([disabled]) .rpl-vote-button-group-label {
+                    color: var(--vote-button-label-color);
+                }
+
+                .rpl-vote-button-group:not([disabled]):hover.rpl-vote-button-group-label {
+                    color: var(--vote-button-label-color-hover);
+                }
+
+                .rpl-vote-button-group .rpl-vote-button-group-divider {
+                    background-color: var(--vote-button-divider-color);
+                }
+
+                .rpl-vote-button-group[disabled] button[rpl]:disabled {
+                    --button-color-background-disabled: transparent;
+                }
+
+                .rpl-vote-button-group.button-plain {
+                    --vote-button-label-color: var(--color-secondary-plain);
+                    --vote-button-label-color-hover: var(--color-secondary-plain);
+                }
+
+                .rpl-vote-button-group.button-plain button[rpl]:first-child {
+                    --button-color-text-hover: var(--color-upvote-plain-weaker);
+                }
+
+                .rpl-vote-button-group.button-plain button[rpl]:last-child {
+                    --button-color-text-hover: var(--color-downvote-plain-weaker);
+                }
+
+                .rpl-vote-button-group.button-plain.upvote {
+                    --vote-button-label-color: var(--color-upvote-plain);
+                }
+
+                .rpl-vote-button-group.button-plain.upvote button[rpl]:first-child {
+                    --button-color-text-default: var(--color-upvote-plain-weaker);
+                    --button-color-text-hover: var(--color-upvote-plain-weaker);
+                    --button-color-text-disabled: var(--color-upvote-plain-disabled);
+                    --button-color-text-activated: var(--color-upvote-plain-weaker);
+                }
+
+                .rpl-vote-button-group.button-plain.downvote {
+                    --vote-button-label-color: var(--color-downvote-plain);
+                }
+
+                .rpl-vote-button-group.button-plain.downvote button[rpl]:last-child {
+                    --button-color-text-default: var(--color-downvote-plain-weaker);
+                    --button-color-text-disabled: var(--color-downvote-plain-disabled);
+                    --button-color-text-activated: var(--color-downvote-plain-weaker);
+                }
+
+                .rpl-vote-button-group.button-secondary {
+                    --vote-button-label-color: var(--color-secondary-plain);
+                    --vote-button-label-color-hover: var(--color-secondary-plain);
+                    --vote-button-divider-color: var(--color-neutral-border);
+                }
+
+                .rpl-vote-button-group.button-secondary button[rpl]:first-child {
+                    --button-color-text-hover: var(--color-upvote-plain-weaker);
+                }
+
+                .rpl-vote-button-group.button-secondary button[rpl]:last-child {
+                    --button-color-text-hover: var(--color-downvote-plain-weaker);
+                }
+
+                .rpl-vote-button-group.button-secondary.upvote, .rpl-vote-button-group.button-secondary.upvote button[rpl] {
+                    --button-color-text-default: var(--color-upvote-onBackground);
+                    --button-color-text-hover: var(--color-upvote-onBackground);
+                    --button-color-text-disabled: var(--color-upvote-disabled);
+                    --button-color-text-activated: var(--color-upvote-onBackground);
+                }
+
+                .rpl-vote-button-group.button-secondary.upvote:not([disabled]), .rpl-vote-button-group.button-secondary.upvote button[rpl]:not([disabled]) {
+                    --button-color-background-default: var(--color-upvote-background);
+                    --button-color-background-hover: var(--color-upvote-background-hover);
+                    --button-color-background-active: var(--color-upvote-background-hover);
+                    --vote-button-divider-color: var(--color-upvote-onBackground);
+                    --vote-button-label-color: var(--color-media-onBackground);
+                }
+
+                .rpl-vote-button-group.button-secondary.downvote, .rpl-vote-button-group.button-secondary.downvote button[rpl] {
+                    --button-color-text-default: var(--color-downvote-onBackground);
+                    --button-color-text-hover: var(--color-downvote-onBackground);
+                    --button-color-text-disabled: var(--color-downvote-disabled);
+                    --button-color-text-activated: var(--color-downvote-onBackground);
+                }
+
+                .rpl-vote-button-group.button-secondary.downvote:not([disabled]), .rpl-vote-button-group.button-secondary.downvote button[rpl]:not([disabled]) {
+                    --button-color-background-default: var(--color-downvote-background);
+                    --button-color-background-hover: var(--color-downvote-background-hover);
+                    --button-color-background-active: var(--color-downvote-background-hover);
+                    --vote-button-divider-color: var(--color-upvote-onBackground);
+                    --vote-button-label-color: var(--color-media-onBackground);
+                }
+
+                .rpl-vote-button-group.button-bordered-cab {
+                    --vote-button-label-color: var(--color-secondary-plain);
+                    --vote-button-label-color-hover: var(--color-secondary-plain);
+                }
+
+                .rpl-vote-button-group.button-bordered-cab button[rpl]:first-child {
+                    --button-color-text-hover: var(--color-upvote-plain-weaker);
+                }
+
+                .rpl-vote-button-group.button-bordered-cab button[rpl]:last-child {
+                    --button-color-text-hover: var(--color-downvote-plain-weaker);
+                }
+
+                .rpl-vote-button-group.button-bordered-cab.upvote {
+                    --vote-button-label-color: var(--color-upvote-plain);
+                }
+
+                .rpl-vote-button-group.button-bordered-cab.upvote button[rpl]:first-child {
+                    --button-color-text-default: var(--color-upvote-plain-weaker);
+                    --button-color-text-hover: var(--color-upvote-plain-weaker);
+                    --button-color-text-disabled: var(--color-upvote-plain-disabled);
+                    --button-color-text-activated: var(--color-upvote-plain-weaker);
+                }
+
+                .rpl-vote-button-group.button-bordered-cab.downvote {
+                    --vote-button-label-color: var(--color-downvote-plain);
+                }
+
+                .rpl-vote-button-group.button-bordered-cab.downvote button[rpl]:last-child {
+                    --button-color-text-default: var(--color-downvote-plain-weaker);
+                    --button-color-text-hover: var(--color-downvote-plain-weaker);
+                    --button-color-text-disabled: var(--color-downvote-plain-disabled);
+                    --button-color-text-activated: var(--color-downvote-plain-weaker);
+                }
+
+                .rpl-vote-button-group.button-media-cab {
+                    --vote-button-label-color: var(--color-media-onBackground);
+                    --vote-button-label-color-hover: var(--color-media-onBackground);
+                    --vote-button-divider-color: var(--color-media-border-weak);
+                }
+
+                .rpl-vote-button-group.button-media-cab button[rpl]:first-child {
+                    --button-color-text-hover: var(--color-upvote-onStrongScrim-weaker);
+                }
+
+                .rpl-vote-button-group.button-media-cab button[rpl]:last-child {
+                    --button-color-text-hover: var(--color-downvote-onStrongScrim-weaker);
+                }
+
+                .rpl-vote-button-group.button-media-cab.upvote {
+                    --vote-button-label-color: var(--color-upvote-onStrongScrim);
+                }
+
+                .rpl-vote-button-group.button-media-cab.upvote button[rpl]:first-child {
+                    --button-color-text-default: var(--color-upvote-onStrongScrim-weaker);
+                    --button-color-text-activated: var(--color-upvote-onStrongScrim-weaker);
+                    --button-color-text-disabled: var(--color-upvote-onStrongScrim-disabled);
+                }
+
+                .rpl-vote-button-group.button-media-cab.downvote {
+                    --vote-button-label-color: var(--color-downvote-onStrongScrim);
+                }
+
+                .rpl-vote-button-group.button-media-cab.downvote button[rpl]:last-child {
+                    --button-color-text-default: var(--color-downvote-onStrongScrim-weaker);
+                    --button-color-text-activated: var(--color-downvote-onStrongScrim-weaker);
+                    --button-color-text-disabled: var(--color-downvote-onStrongScrim-disabled);
+                }  
+            `]
+
     }
 }
 

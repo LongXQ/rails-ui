@@ -1,5 +1,5 @@
 import {LitElement, css, html} from 'lit'
-import {shredditCommentStyles} from "./reddit.js";
+import {shredditStyles} from "../shreddit-styles.js";
 
  function _join(...e) {return e.filter(Boolean).join(" ")}
 
@@ -80,7 +80,7 @@ export class ShRedditComment extends LitElement {
     static get properties() {
         return {
             thingId: {type: String},
-            collapsed: {type: Boolean}
+            collapsed: {type: Boolean, reflect: true}
         }
     }
 
@@ -247,7 +247,7 @@ export class ShRedditComment extends LitElement {
         return html`
             <div class="flex justify-center self-start py-[2px] bg-neutral-background relative mt-[6px]">
 
-                <button rpl="" aria-controls="comment-children" aria-expanded="true"
+                <button rpl="" aria-controls="comment-children" aria-expanded="true" @click="${this.handleCollapse}"
                         aria-label="Toggle Comment Thread"
                         class="text-neutral-content-strong bg-neutral-background overflow-visible w-md h-md
 button-small px-[var(--rem6)]
@@ -270,7 +270,8 @@ button inline-flex "> <span class="flex items-center justify-center"> <span
 
     renderUncollapseButton() {
             return html`
-                <div class="flex justify-center"> <button rpl="" class="text-neutral-content-strong bg-neutral-background overflow-visible w-lg xs:w-xl h-xl xs:h-[40px]
+                <div class="flex justify-center"> 
+                    <button rpl="" @click="${this.handleCollapse}" class="text-neutral-content-strong bg-neutral-background overflow-visible w-lg xs:w-xl h-xl xs:h-[40px]
 button-small px-[var(--rem6)]
 button-plain
 
@@ -391,7 +392,7 @@ button inline-flex "><span class="flex items-center justify-center"> <span class
 
     static get styles() {
         return [
-            shredditCommentStyles,
+            shredditStyles,
             css`
                 :host {
                     display: block;
