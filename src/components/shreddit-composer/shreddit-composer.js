@@ -19,6 +19,7 @@ export class ShredditComposer extends LitElement {
                     <div class="flex flex-row-reverse gap-xs items-center justify-end ms-auto" slot="action-bar-right">  
                         <slot name="submit-button"></slot> 
                         <slot name="cancel-button"></slot>  </div>
+                        <slot name="placeholder-html" slot="placeholder-html"></slot>
                 </reddit-rte>
             </div>
         `
