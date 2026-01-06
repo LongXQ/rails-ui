@@ -151,7 +151,32 @@ export class ShRedditComment extends LitElement {
 
             }
 
+        this.handleHovercardTriggerClick = e => {
+            e.metaKey || e.preventDefault()
+        }
 
+
+    }
+
+            connectedCallback() {
+            super.connectedCallback(),
+
+            this._rplHovercards?.forEach((e => {
+                e.addEventListener("click", this.handleHovercardTriggerClick)
+            }
+            ))
+        }
+
+                disconnectedCallback() {
+            super.disconnectedCallback(),
+            this._rplHovercards?.forEach((e => {
+                e.removeEventListener("click", this.handleHovercardTriggerClick)
+            }
+            ))
+        }
+
+    get _rplHovercards() {
+            return this.querySelectorAll('[slot="commentAvatar"] rpl-hovercard > div:not([slot="content"]), [slot="commentMeta"] rpl-hovercard > div:not([slot="content"])')
     }
 
     getProps() {

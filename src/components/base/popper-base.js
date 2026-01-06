@@ -31,6 +31,7 @@ export class PopperBase extends Al {
             distance: {type: Number},
             open: {type: Boolean, reflect: true},
             skidding: {type: Number},
+            trigger: {},
             hoist: {type: Boolean},
             noAnimate: {type: Boolean, attribute: "no-animate"},
             arrow: {type: Boolean},
@@ -218,7 +219,7 @@ export class PopperBase extends Al {
                       @focusin="${this.interactionController.handleFocus}"
                       @focusout="${this.interactionController.handleBlur}"
                       @click="${e => this.eventUsedMap.set(e, !0)}" ${ref(this.popperRef)}>
-                <slot name="anchor" slot="anchor" aria-describedby="hovercard"
+                <slot slot="anchor" aria-describedby="hovercard"
                       @click="${this.interactionController.handleClick}"
                       ${ref(this.defaultSlotRef)} @slotchange="${this.handleAnchorSlotChange}"></slot>
                 <div part="body" id="hovercard" class="hovercard-body" role="dialog"

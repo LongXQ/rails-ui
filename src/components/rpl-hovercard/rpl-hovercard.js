@@ -1,6 +1,5 @@
-import {LitElement, css, html} from 'lit'
+import {css} from 'lit'
 import '@shoelace-style/shoelace/dist/components/popup/popup.js';
-import {shredditStyles} from "../shreddit-styles.js";
 import {PopperBase} from "../base/popper-base.js";
 
 /**

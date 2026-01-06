@@ -23,7 +23,7 @@ export class ShredditOverflowMenu extends LitElement {
     render() {
         return html`
             <rpl-dropdown placement="bottom-end" data-ignore-click-interception class="block comment-overflow-menu">
-                <faceplate-tracker slot="anchor" source="comment" action="click" noun="overflow_menu"> <!--?lit$220806737$--><button rpl="" aria-disabled="false" aria-label="打开用户操作" class="button border-md open-menu-btn text-12 button-plain-weak  inline-flex items-center
+                <faceplate-tracker source="comment" action="click" noun="overflow_menu"> <!--?lit$220806737$--><button rpl="" aria-disabled="false" aria-label="打开用户操作" class="button border-md open-menu-btn text-12 button-plain-weak  inline-flex items-center
        px-sm
       " id="overflow-trigger" style="height: var(--size-button-sm-h); font: var(--font-button-sm)" aria-haspopup="menu" aria-expanded="true"> <!--?lit$220806737$--><span class="flex items-center"> <!--?lit$220806737$--><span class="flex text-16"><!--?lit$220806737$--><svg rpl="" fill="currentColor" height="12" icon-name="overflow-horizontal" viewBox="0 0 20 20" width="12" xmlns="http://www.w3.org/2000/svg"> <!--?lit$220806737$--><!--?lit$220806737$--><path d="M16 11.75a1.75 1.75 0 11.001-3.501A1.75 1.75 0 0116 11.75zM11.75 10a1.75 1.75 0 10-3.501.001A1.75 1.75 0 0011.75 10zm-6 0a1.75 1.75 0 10-3.501.001A1.75 1.75 0 005.75 10z"></path><!--?--> </svg></span> <!--?lit$220806737$--> </span> <!--?lit$220806737$--><!--?--> </button> <!----></faceplate-tracker>
                 <faceplate-menu slot="content" class="whitespace-nowrap max-h-[25.5rem] overflow-y-auto rounded-1">
