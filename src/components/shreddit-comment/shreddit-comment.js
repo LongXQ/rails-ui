@@ -80,6 +80,8 @@ export class ShRedditComment extends LitElement {
     static get properties() {
         return {
             thingId: {type: String},
+            avatar: {type: String},
+            author: {type: String},
             collapsed: {type: Boolean, reflect: true}
         }
     }
@@ -218,56 +220,6 @@ export class ShRedditComment extends LitElement {
             // e.f(this, this.collapsed ? o.bx() : o.by())
     }
 
-    commentDetailSummary() {
-        return html`
-            <summary class="grid grid-cols-[24px_minmax(0,1fr)] xs:grid-cols-[32px_minmax(0,1fr)]"
-                     aria-label="mrmegatelo24 的评论的元数据">
-                <div class="relative">
-                    <slot name="commentAvatar"></slot>
-                </div>
-                <div class="flex relative ">
-                    <slot name="commentMeta" id="comment-meta"></slot>
-                </div>
-            </summary>
-        `
-    }
-
-    commentDetailBody() {
-        return html`
-            <div class="grid grid-cols-[24px_1fr] relative xs:grid-cols-[32px_1fr]">
-                ${this.mainThreadLine()}
-                ${this.commentContent()}
-                ${this.commentActionRow()}
-                ${this.commentNextReply()}
-                ${this.commentChildren()}
-            </div>
-        `
-    }
-
-    mainThreadLine() {
-        return html`
-            <div aria-hidden="true"
-                 class="absolute top-0 start-0 bottom-0 w-lg xs:w-xl flex justify-center items-center z-0 cursor-pointer group mb-sm">
-                <div data-testid="main-thread-line" class="w-[1px] h-full group-hover:bg-tone-2 bg-tone-4"></div>
-            </div>
-        `
-    }
-
-    commentContent() {
-        return html`
-            <div class="contents">
-                <div class=""></div>
-                <div class="min-w-0 ">
-                    <slot></slot>
-                    <slot name="comment-edit"></slot>
-                    <div class="relative">
-                        <slot name="comment"></slot>
-                    </div>
-                </div>
-            </div>
-        `
-    }
-
     renderCollapseButton() {
         return html`
             <div class="flex justify-center self-start py-[2px] bg-neutral-background relative mt-[6px]">
@@ -306,46 +258,6 @@ items-center justify-center
 button inline-flex "><span class="flex items-center justify-center"> <span class="flex"><svg rpl="" fill="currentColor" height="16" icon-name="add-circle" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg"> <path d="M10 1a9 9 0 100 18 9 9 0 000-18zm0 16.2a7.2 7.2 0 117.2-7.2 7.208 7.208 0 01-7.2 7.2zm.9-8.1H14v1.8h-3.1V14H9.1v-3.1H6V9.1h3.1V6h1.8v3.1z"></path>< </svg></span>  </span> </button> </div>
             `
         }
-
-    commentActionRow() {
-        return html`
-            <div class="contents">
-                ${this.hasRenderedComments?this.renderCollapseButton():html`<div></div>`}
-                <div class="min-w-0 ">
-                    <slot name="actionRow"></slot>
-                    <slot name="awardsRow"></slot>
-                </div>
-            </div>
-        `
-    }
-
-    commentNextReply() {
-        return html`
-            <div class="contents">
-                <div></div>
-                <div class="min-w-0">
-                    <slot name="next-reply"></slot>
-                </div>
-            </div>
-        `
-    }
-
-    commentChildren() {
-        return html`
-            <div id="comment-children" class="contents [&>.threadline>*]:border-tone-4">
-                <div aria-hidden="true" class="threadline flex justify-end align-start relative pointer-events-none">
-                    <div data-testid="branch-line"
-                         class="box-border h-md border-0 border-tone-4 border-solid border-b-[1px]  w-[calc(50%+0.5px)] border-s-[1px] rounded-es-[12px]"></div>
-                </div>
-                <slot name="children-t1_mqhv0fs-0"></slot>
-                <div aria-hidden="true" class="threadline flex justify-end align-start relative bg-neutral-background">
-                    <div data-testid="branch-line"
-                         class="box-border h-md border-0 border-tone-4 border-solid border-b-[1px] cursor-pointer w-[calc(50%+0.5px)] border-s-[1px] rounded-es-[12px]"></div>
-                </div>
-                <slot name="children-t1_mqhv0fs-1"></slot>
-            </div>
-        `
-    }
 
     renderChildren(e, {forceUpdate: t}={}) {
         const o = Array.from(this.querySelectorAll(':scope > [slot^="children"]'));
@@ -391,29 +303,10 @@ button inline-flex "><span class="flex items-center justify-center"> <span class
     }
 
     render() {
-
-        // return html`
-        //     <details role="article" tabindex="0" open="" aria-label="来自 mrmegatelo24 8个月前 的评论" actioned="">
-        //         ${this.commentDetailSummary()}
-        //         ${this.commentDetailBody()}
-        //     </details>
-        // `
           const e = this.renderChildren(this.getProps());
           return "hidden-above-fold" === this.currentTreePosition ? e : h(this.getProps(), e)
 
     }
-
-    // static get styles() {
-    //     return [shredditCommentStyles, css`
-    //         :host {
-    //             display: block;
-    //         }
-    //
-    //         details {
-    //             position: relative;
-    //         }
-    //     `]
-    // }
 
     static get styles() {
         return [
