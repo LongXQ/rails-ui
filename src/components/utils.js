@@ -394,7 +394,26 @@ let je = () => new URL(window.location.href);
         e.JSON = "application/json"
     }(Ke || (Ke = {}));
 
+    // const et = {
+    //     enctype: $e.UrlEncoded,
+    //     encoders: {
+    //         [$e.UrlEncoded]: Je
+    //     }
+    // };
 
+       let tt = () => {}
+    ;
+           let it = {
+        backoff: 500,
+        attempts: 3
+    };
+
+
+
+    const ot = {
+        credentials: Ke.SameDomain,
+        mode: "no-cors"
+    };
 class nt {
     constructor(e) {
         this.isRequestInProgress = !1,
@@ -446,88 +465,132 @@ class nt {
         e.defaultPrevented || this.host.dispatchEvent(e)
     }
 
+    // async request(e, t) {
+    //     var i, o, n, a;
+    //     this.isRequestInProgress = !0;
+    //     const s = `${je().origin}${"/" === e[0] ? "" : "/"}${e}`
+    //         , d = t && t.loading === ve.Preload ? ot : et
+    //         , l = (null == t ? void 0 : t.onError) || tt
+    //         , c = (null == t ? void 0 : t.retryOptions) || it;
+    //     Number.isInteger(c.attempts) && c.attempts > 0 || (c.attempts = 3),
+    //         this.validateRequestOptions(t || {});
+    //     const u = Ze((e => {
+    //             const i = this.buildRequest(t || {}, e, c.attempts);
+    //             return Ye(s, i, d)
+    //         }
+    //     ), c);
+    //     try {
+    //         let e;
+    //         try {
+    //             for (var p, h = !0, m = r(u); !(i = (p = await m.next()).done);) {
+    //                 a = p.value,
+    //                     h = !1;
+    //                 try {
+    //                     const t = a;
+    //                     let i = !1;
+    //                     const o = () => {
+    //                             i = !0
+    //                         }
+    //                     ;
+    //                     if (e = void 0,
+    //                     "faceplate-error" === t.type) {
+    //                         const n = this._handleError(t.detail, "partial-request-fetch-failure");
+    //                         if (l({
+    //                             event: n,
+    //                             href: s,
+    //                             retry: o
+    //                         }),
+    //                             this._dispatchEventIfNotPrevented(n),
+    //                             i) {
+    //                             e = n.detail;
+    //                             continue
+    //                         }
+    //                         return
+    //                     }
+    //                     if (this.host.dispatchEvent(t),
+    //                         t.defaultPrevented)
+    //                         return;
+    //                     if ("faceplate-response" === t.type) {
+    //                         const n = t.detail.response;
+    //                         if (!n.ok) {
+    //                             const t = this._handleNetworkError(n);
+    //                             if (l({
+    //                                 event: t,
+    //                                 res: n,
+    //                                 href: s,
+    //                                 retry: o
+    //                             }),
+    //                                 this._dispatchEventIfNotPrevented(t),
+    //                                 i) {
+    //                                 e = t.detail;
+    //                                 continue
+    //                             }
+    //                             return
+    //                         }
+    //                         const r = We(n);
+    //                         if ("text/vnd.reddit.partial+html" !== r)
+    //                             throw new Error(`Unsupported content type "${r}" returned from ${s}`);
+    //                         return n
+    //                     }
+    //                 } finally {
+    //                     h = !0
+    //                 }
+    //             }
+    //         } catch (e) {
+    //             o = {
+    //                 error: e
+    //             }
+    //         } finally {
+    //             try {
+    //                 h || i || !(n = m.return) || (await n.call(m))
+    //             } finally {
+    //                 if (o)
+    //                     throw o.error
+    //             }
+    //         }
+    //         if (e) {
+    //             const t = v("faceplate-alert", e);
+    //             l({
+    //                 event: t,
+    //                 href: s
+    //             }),
+    //                 this._dispatchEventIfNotPrevented(t)
+    //         }
+    //     } catch (e) {
+    //         const t = this._handleError(e, "partial-request-uncaught-failure");
+    //         l({
+    //             event: t,
+    //             error: e instanceof Error ? e : void 0,
+    //             href: s
+    //         }),
+    //             this._dispatchEventIfNotPrevented(t)
+    //     } finally {
+    //         this.isRequestInProgress = !1
+    //     }
+    // }
+
     async request(e, t) {
         var i, o, n, a;
         this.isRequestInProgress = !0;
         const s = `${je().origin}${"/" === e[0] ? "" : "/"}${e}`
-            , d = t && t.loading === ve.Preload ? ot : et
+            // , d = t && t.loading === ve.Preload ? ot : et
             , l = (null == t ? void 0 : t.onError) || tt
             , c = (null == t ? void 0 : t.retryOptions) || it;
-        Number.isInteger(c.attempts) && c.attempts > 0 || (c.attempts = 3),
             this.validateRequestOptions(t || {});
-        const u = Ze((e => {
-                const i = this.buildRequest(t || {}, e, c.attempts);
-                return Ye(s, i, d)
-            }
-        ), c);
+
         try {
             let e;
             try {
-                for (var p, h = !0, m = r(u); !(i = (p = await m.next()).done);) {
-                    a = p.value,
-                        h = !1;
-                    try {
-                        const t = a;
-                        let i = !1;
-                        const o = () => {
-                                i = !0
-                            }
-                        ;
-                        if (e = void 0,
-                        "faceplate-error" === t.type) {
-                            const n = this._handleError(t.detail, "partial-request-fetch-failure");
-                            if (l({
-                                event: n,
-                                href: s,
-                                retry: o
-                            }),
-                                this._dispatchEventIfNotPrevented(n),
-                                i) {
-                                e = n.detail;
-                                continue
-                            }
-                            return
-                        }
-                        if (this.host.dispatchEvent(t),
-                            t.defaultPrevented)
-                            return;
-                        if ("faceplate-response" === t.type) {
-                            const n = t.detail.response;
-                            if (!n.ok) {
-                                const t = this._handleNetworkError(n);
-                                if (l({
-                                    event: t,
-                                    res: n,
-                                    href: s,
-                                    retry: o
-                                }),
-                                    this._dispatchEventIfNotPrevented(t),
-                                    i) {
-                                    e = t.detail;
-                                    continue
-                                }
-                                return
-                            }
-                            const r = We(n);
-                            if ("text/vnd.reddit.partial+html" !== r)
-                                throw new Error(`Unsupported content type "${r}" returned from ${s}`);
-                            return n
-                        }
-                    } finally {
-                        h = !0
-                    }
-                }
+                var requestOptions = this.buildRequest(t || {}, 0, c.attempts);
+                const headers = new Headers(t?.headers)
+                 const response = await fetch('http://127.0.0.1:8000/svc/shreddit/more-comments/Fauxmoi/t3_1q4t7vp', {...requestOptions || {}, headers: headers});
+                 return response;
             } catch (e) {
                 o = {
                     error: e
                 }
             } finally {
-                try {
-                    h || i || !(n = m.return) || (await n.call(m))
-                } finally {
-                    if (o)
-                        throw o.error
-                }
+
             }
             if (e) {
                 const t = v("faceplate-alert", e);
