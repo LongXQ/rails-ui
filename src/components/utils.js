@@ -12,22 +12,22 @@ function v(e, t, i = !0) {
 }
 
 const pe = {
-        rootMargin: "200px"
-    },he = new Map;
+    rootMargin: "200px"
+}, he = new Map;
 
-    function me(e, t) {
-        return !he.has(e) && t && he.set(e, function(e) {
-            return new IntersectionObserver((e => {
+function me(e, t) {
+    return !he.has(e) && t && he.set(e, function (e) {
+        return new IntersectionObserver((e => {
                 for (const t of e) {
                     const e = t.target
-                      , i = t.isIntersecting ? v("faceplate-enter", t, !1) : v("faceplate-leave", t, !1);
+                        , i = t.isIntersecting ? v("faceplate-enter", t, !1) : v("faceplate-leave", t, !1);
                     e.dispatchEvent(i)
                 }
             }
-            ),e)
-        }(t)),
+        ), e)
+    }(t)),
         he.get(e)
-    }
+}
 
 class ge {
     constructor(e = pe) {
@@ -381,39 +381,40 @@ function ze(e, t) {
 }
 
 let je = () => new URL(window.location.href);
-    var $e, Ke;
-    !function(e) {
-        e.Omit = "omit",
+var $e, Ke;
+!function (e) {
+    e.Omit = "omit",
         e.SameOrigin = "same-origin",
         e.Include = "include",
         e.SameDomain = "same-domain"
-    }($e || ($e = {})),
-    function(e) {
+}($e || ($e = {})),
+    function (e) {
         e.UrlEncoded = "application/x-www-form-urlencoded",
-        e.FormData = "multipart/form-data",
-        e.JSON = "application/json"
+            e.FormData = "multipart/form-data",
+            e.JSON = "application/json"
     }(Ke || (Ke = {}));
 
-    // const et = {
-    //     enctype: $e.UrlEncoded,
-    //     encoders: {
-    //         [$e.UrlEncoded]: Je
-    //     }
-    // };
+// const et = {
+//     enctype: $e.UrlEncoded,
+//     encoders: {
+//         [$e.UrlEncoded]: Je
+//     }
+// };
 
-       let tt = () => {}
-    ;
-           let it = {
-        backoff: 500,
-        attempts: 3
-    };
+let tt = () => {
+    }
+;
+let it = {
+    backoff: 500,
+    attempts: 3
+};
 
 
+const ot = {
+    credentials: Ke.SameDomain,
+    mode: "no-cors"
+};
 
-    const ot = {
-        credentials: Ke.SameDomain,
-        mode: "no-cors"
-    };
 class nt {
     constructor(e) {
         this.isRequestInProgress = !1,
@@ -576,15 +577,39 @@ class nt {
             // , d = t && t.loading === ve.Preload ? ot : et
             , l = (null == t ? void 0 : t.onError) || tt
             , c = (null == t ? void 0 : t.retryOptions) || it;
-            this.validateRequestOptions(t || {});
+        this.validateRequestOptions(t || {});
 
         try {
             let e;
             try {
                 var requestOptions = this.buildRequest(t || {}, 0, c.attempts);
                 const headers = new Headers(t?.headers)
-                 const response = await fetch('http://127.0.0.1:8000/svc/shreddit/more-comments/Fauxmoi/t3_1q4t7vp', {...requestOptions || {}, headers: headers});
-                 return response;
+
+                var faceplateRequest = new CustomEvent('faceplate-request', {
+                    composed: true,
+                    bubbles: true,
+                    cancelable: false,
+                    detail: null
+                })
+                if (this.host.dispatchEvent(faceplateRequest),
+                    t.defaultPrevented)
+                    return;
+
+                const response = await fetch('http://127.0.0.1:8000/svc/shreddit/more-comments/Fauxmoi/t3_1q4t7vp', {
+                    ...requestOptions || {},
+                    headers: headers
+                });
+
+                var faceplateResponse = new CustomEvent('faceplate-response', {
+                    composed: true,
+                    bubbles: true,
+                    cancelable: false,
+                    detail: null
+                })
+                if (this.host.dispatchEvent(faceplateResponse),
+                    t.defaultPrevented)
+                    return;
+                return response;
             } catch (e) {
                 o = {
                     error: e
@@ -808,14 +833,18 @@ export class FaceplatePartial extends PartialBase {
             , o = this._shouldShowLoadingSlot();
         let slot;
         if (o) {
-            slot = html`<slot name="loading"></slot>`
-        }else {
-            slot = html`<slot></slot>`
+            slot = html`
+                <slot name="loading"></slot>`
+        } else {
+            slot = html`
+                <slot></slot>`
         }
         if (i) {
-            return html` <div tabindex="0"> ${slot} </div> `
-        }else {
-            return html` <div> ${slot} </div> `
+            return html`
+                <div tabindex="0"> ${slot}</div> `
+        } else {
+            return html`
+                <div> ${slot}</div> `
         }
         // return html` <div tabindex="${e.l(i ? 0 : void 0)}"> <slot name="${e.l(o ? "loading" : void 0)}"></slot> </div> `
     }
