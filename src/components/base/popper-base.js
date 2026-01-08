@@ -1,10 +1,9 @@
-import {LitElement, html} from 'lit'
+import {html} from 'lit'
 import {classMap} from 'lit/directives/class-map.js';
 
 import {ref, createRef} from 'lit/directives/ref.js';
-import {a2, bM, bN, el, fl, gl, Sl, Xd, Zd} from "../utils.js";
+import {a2, bM, tl, el, fl, gl, Sl, Xd, Zd, Al} from "../utils.js";
 import {InteractionController} from "../controller/InteractionController.js";
-import {Al} from "./base.js";
 
 const a = new WeakSet;
 
@@ -13,17 +12,6 @@ function n(e, t, o) {
 }
 
 export class PopperBase extends Al {
-    // static properties = {
-    //     placement: {},
-    //     disabled: {type: Boolean, reflect: true},
-    //     distance: {type: Number},
-    //     open: {type: Boolean, reflect: true},
-    //     skidding: {type: Number},
-    //     hoist: {type: Boolean},
-    //     noAnimate: {type: Boolean, attribute: "no-animate"},
-    //     arrow: {type: Boolean},
-    // }
-
     static get properties() {
         return {
             placement: {},
@@ -144,7 +132,7 @@ export class PopperBase extends Al {
                 document.addEventListener("keydown", this.handleDocumentKeyDown),
                     document.addEventListener("click", this.handleDocumentClick),
                     document.addEventListener("faceplate-hovercard:open", this.handleLegacyHovercardOpen),
-                    await bN(this.hovercardBodyRef.value),
+                    await tl(this.hovercardBodyRef.value),
                     n(this.hovercardBodyRef, "hidden", !1),
                     n(this.popperRef, "active", !0),
                     this.updateAnchorElementAria();
@@ -159,7 +147,7 @@ export class PopperBase extends Al {
                 document.removeEventListener("keydown", this.handleDocumentKeyDown),
                     document.removeEventListener("click", this.handleDocumentClick),
                     document.removeEventListener("faceplate-hovercard:open", this.handleLegacyHovercardOpen),
-                    await bN(this.hovercardBodyRef.value);
+                    await tl(this.hovercardBodyRef.value);
                 const {keyframes: t, options: o} = Zd(this, "hovercard.hide");
                 await el(this.popperRef.value?.popup, t, o),
                     n(this.popperRef, "active", !1),
