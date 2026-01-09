@@ -6,6 +6,7 @@ setBasePath('../node_modules/@shoelace-style/shoelace/dist');
 // <sl-button>, <sl-icon>, <sl-input>, and <sl-rating> are ready to use!
 
 import './components/utils.js'
+import './components/shreddit-loading/shreddit-loading.js'
 import './components/reddit-button.js';
 import  './components/shreddit-app/shreddit-app.js';
 import './components/shreddit-comment-tree/shreddit-comment-tree.js';

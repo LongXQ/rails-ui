@@ -1,4 +1,5 @@
 import { LitElement, css, html } from 'lit'
+import {shredditStyles} from "../shreddit-styles.js";
 
 /**
  * An example element.
@@ -9,6 +10,10 @@ import { LitElement, css, html } from 'lit'
 export class ShRedditCommentTree extends LitElement {
   static get properties() {
     return {
+        postId: {type: String, attribute: "post-id"},
+        isTruncated: {type: Boolean},
+        ui: {type: String},
+        maxDepth: {type: Number, attribute: "max-depth"}
     }
   }
 
@@ -28,60 +33,13 @@ export class ShRedditCommentTree extends LitElement {
     `
   }
 
-  static get styles() {
-    return css`
-        :host {
+    static get styles() {
+        return [shredditStyles, css`:host {
             display: block;
             background-color: var(--shreddit-content-background);
             padding-bottom: var(--spacer-xs);
-        }
-
-        .px-md {
-            padding-left: 1rem;
-            padding-right: 1rem;
-        }
-
-        .gap-md {
-            gap: 1rem;
-        }
-
-        .flex-col {
-            flex-direction: column;
-        }
-
-        .flex {
-            display: flex;
-        }
-
-        .relative {
-            position: relative;
-        }
-
-        .absolute {
-            position: absolute;
-        }
-
-        .-start-full {
-            inset-inline-start: -100%;
-        }
-
-        .-top-full {
-            top: -100%;
-        }
-
-        .h-px {
-            height: 1px;
-        }
-
-        .w-px {
-            width: 1px;
-        }
-
-        .overflow-hidden {
-            overflow: hidden;
-        }
-    `
-  }
+        }  `]
+    }
 }
 
 window.customElements.define('shreddit-comment-tree', ShRedditCommentTree)

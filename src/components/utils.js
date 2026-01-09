@@ -1,4 +1,5 @@
 import {LitElement, css, html} from "lit";
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 // faceplate-partial
 
@@ -427,6 +428,9 @@ class nt {
             body: e.body || new FormData,
             headers: {}
         };
+        if (o.method === be.Get) {
+            delete o.body;
+        }
         return o.headers["X-Reddit-Retry"] = `attempt=${t}, max=${i}`,
         e.loading !== ve.Preload && (o.headers.Accept = "text/vnd.reddit.partial+html, text/html;q=0.9"),
         o.method === be.Get || (o.headers["Content-Type"] = Ke.UrlEncoded),
@@ -466,110 +470,6 @@ class nt {
         e.defaultPrevented || this.host.dispatchEvent(e)
     }
 
-    // async request(e, t) {
-    //     var i, o, n, a;
-    //     this.isRequestInProgress = !0;
-    //     const s = `${je().origin}${"/" === e[0] ? "" : "/"}${e}`
-    //         , d = t && t.loading === ve.Preload ? ot : et
-    //         , l = (null == t ? void 0 : t.onError) || tt
-    //         , c = (null == t ? void 0 : t.retryOptions) || it;
-    //     Number.isInteger(c.attempts) && c.attempts > 0 || (c.attempts = 3),
-    //         this.validateRequestOptions(t || {});
-    //     const u = Ze((e => {
-    //             const i = this.buildRequest(t || {}, e, c.attempts);
-    //             return Ye(s, i, d)
-    //         }
-    //     ), c);
-    //     try {
-    //         let e;
-    //         try {
-    //             for (var p, h = !0, m = r(u); !(i = (p = await m.next()).done);) {
-    //                 a = p.value,
-    //                     h = !1;
-    //                 try {
-    //                     const t = a;
-    //                     let i = !1;
-    //                     const o = () => {
-    //                             i = !0
-    //                         }
-    //                     ;
-    //                     if (e = void 0,
-    //                     "faceplate-error" === t.type) {
-    //                         const n = this._handleError(t.detail, "partial-request-fetch-failure");
-    //                         if (l({
-    //                             event: n,
-    //                             href: s,
-    //                             retry: o
-    //                         }),
-    //                             this._dispatchEventIfNotPrevented(n),
-    //                             i) {
-    //                             e = n.detail;
-    //                             continue
-    //                         }
-    //                         return
-    //                     }
-    //                     if (this.host.dispatchEvent(t),
-    //                         t.defaultPrevented)
-    //                         return;
-    //                     if ("faceplate-response" === t.type) {
-    //                         const n = t.detail.response;
-    //                         if (!n.ok) {
-    //                             const t = this._handleNetworkError(n);
-    //                             if (l({
-    //                                 event: t,
-    //                                 res: n,
-    //                                 href: s,
-    //                                 retry: o
-    //                             }),
-    //                                 this._dispatchEventIfNotPrevented(t),
-    //                                 i) {
-    //                                 e = t.detail;
-    //                                 continue
-    //                             }
-    //                             return
-    //                         }
-    //                         const r = We(n);
-    //                         if ("text/vnd.reddit.partial+html" !== r)
-    //                             throw new Error(`Unsupported content type "${r}" returned from ${s}`);
-    //                         return n
-    //                     }
-    //                 } finally {
-    //                     h = !0
-    //                 }
-    //             }
-    //         } catch (e) {
-    //             o = {
-    //                 error: e
-    //             }
-    //         } finally {
-    //             try {
-    //                 h || i || !(n = m.return) || (await n.call(m))
-    //             } finally {
-    //                 if (o)
-    //                     throw o.error
-    //             }
-    //         }
-    //         if (e) {
-    //             const t = v("faceplate-alert", e);
-    //             l({
-    //                 event: t,
-    //                 href: s
-    //             }),
-    //                 this._dispatchEventIfNotPrevented(t)
-    //         }
-    //     } catch (e) {
-    //         const t = this._handleError(e, "partial-request-uncaught-failure");
-    //         l({
-    //             event: t,
-    //             error: e instanceof Error ? e : void 0,
-    //             href: s
-    //         }),
-    //             this._dispatchEventIfNotPrevented(t)
-    //     } finally {
-    //         this.isRequestInProgress = !1
-    //     }
-    // }
-
     async request(e, t) {
         var i, o, n, a;
         this.isRequestInProgress = !0;
@@ -579,6 +479,7 @@ class nt {
             , c = (null == t ? void 0 : t.retryOptions) || it;
         this.validateRequestOptions(t || {});
 
+        const url = 'http://127.0.0.1:8000' + e
         try {
             let e;
             try {
@@ -595,7 +496,7 @@ class nt {
                     t.defaultPrevented)
                     return;
 
-                const response = await fetch('http://127.0.0.1:8000/svc/shreddit/more-comments/Fauxmoi/t3_1q4t7vp', {
+                const response = await fetch(url, {
                     ...requestOptions || {},
                     headers: headers
                 });
@@ -831,22 +732,22 @@ export class FaceplatePartial extends PartialBase {
         var t;
         const i = this.loading === ve.Action && !(null === (t = this.partialRequest) || void 0 === t ? void 0 : t.isRequestInProgress)
             , o = this._shouldShowLoadingSlot();
-        let slot;
-        if (o) {
-            slot = html`
-                <slot name="loading"></slot>`
-        } else {
-            slot = html`
-                <slot></slot>`
-        }
-        if (i) {
-            return html`
-                <div tabindex="0"> ${slot}</div> `
-        } else {
-            return html`
-                <div> ${slot}</div> `
-        }
-        // return html` <div tabindex="${e.l(i ? 0 : void 0)}"> <slot name="${e.l(o ? "loading" : void 0)}"></slot> </div> `
+        // let slot;
+        // if (o) {
+        //     slot = html`
+        //         <slot name="loading"></slot>`
+        // } else {
+        //     slot = html`
+        //         <slot></slot>`
+        // }
+        // if (i) {
+        //     return html`
+        //         <div tabindex="0"> ${slot}</div> `
+        // } else {
+        //     return html`
+        //         <div> ${slot}</div> `
+        // }
+        return html` <div tabindex="${ifDefined(i ? 0 : void 0)}"> <slot name="${ifDefined(o ? "loading" : void 0)}"></slot> </div> `
     }
 
     loadContent() {
